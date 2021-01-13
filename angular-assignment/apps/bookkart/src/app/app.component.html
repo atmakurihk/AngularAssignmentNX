@@ -1,6 +1,6 @@
 <mat-toolbar color="primary">
   <div fxShow="true" fxHide.gt-sm="true">
-    <a href="#" (click)="sidenav.toggle()">
+    <a  (click)="sidenav.toggle()">
       <mat-icon color="accent">toc</mat-icon>
     </a>
   </div>
@@ -14,10 +14,12 @@
       <mat-icon color="accent">search</mat-icon> Search
     </a>
     <a mat-button routerLink="/cart">
-      <mat-icon  matBadge= "15"  matBadgePosition="before" matBadgeColor="accent" color="accent" color="accent">shopping_cart</mat-icon>Cart
+      <mat-icon matBadge="{{cartCount}}" matBadgePosition="before" matBadgeColor="accent"
+        matBadgeHidden="{{cartCount === 0}}" color="accent">shopping_cart</mat-icon>Cart
     </a>
     <a mat-button routerLink="/collection">
-      <mat-icon matBadge= "15"  matBadgePosition="before" matBadgeColor="accent" color="accent">collections_bookmark</mat-icon>My Collection
+      <mat-icon matBadge="{{collectionCount}}" matBadgePosition="before" matBadgeColor="accent"
+        matBadgeHidden="{{collectionCount === 0}}" color="accent">collections_bookmark</mat-icon>My Collection
     </a>
   </div>
 </mat-toolbar>
@@ -28,11 +30,13 @@
         <a mat-button routerLink="/search" color="primary">
           <mat-icon color="accent">search</mat-icon> Search
         </a>
-        <a mat-button color="primary">
-          <mat-icon  matBadge= "15"  matBadgePosition="before" matBadgeColor="accent" color="accent" color="accent">shopping_cart</mat-icon>Cart
+        <a mat-button color="primary" routerLink="/cart">
+          <mat-icon matBadge="{{cartCount}}" matBadgePosition="before" matBadgeColor="accent"
+            matBadgeHidden="{{cartCount === 0}}" color="accent">shopping_cart</mat-icon>Cart
         </a>
         <a mat-button color="primary" routerLink="/collection">
-          <mat-icon  matBadge= "15"  matBadgePosition="before" matBadgeColor="accent" color="accent" color="accent">collections_bookmark</mat-icon>My Collection
+          <mat-icon matBadge="{{collectionCount}}" matBadgePosition="before" matBadgeColor="accent"
+            matBadgeHidden="{{collectionCount === 0}}" color="accent">collections_bookmark</mat-icon>My Collection
         </a>
       </div>
     </mat-drawer>

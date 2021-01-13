@@ -1,3 +1,5 @@
+import { CartService } from './../cart.service';
+import { BillingAddress } from './../models/billingAddress.model';
 import { CollectionService } from './../collection.service';
 import { BookService } from './../book.service';
 import { Component, OnInit } from '@angular/core';
@@ -12,9 +14,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class BillingComponent implements OnInit {
   id!: number;
   billingForm !: FormGroup;
+  billingAddress: BillingAddress = null;
 
   constructor(private route: ActivatedRoute,
     private bookService: BookService,
+    private cartService: CartService,
     private collectionService: CollectionService,
     private router: Router) { }
 
@@ -31,16 +35,33 @@ export class BillingComponent implements OnInit {
 
   initBillingForm(): void {
 
-
     this.billingForm = new FormGroup({
       name: new FormControl(null, Validators.required),
       email: new FormControl(null, [Validators.required, Validators.email]),
       mobile: new FormControl(null, Validators.required),
       address: new FormControl(null, Validators.required)
     });
+
   }
   submitBill(): void {
-    this.collectionService.addToCollection(this.bookService.getbookById(this.id));
+    console.log("bill form ", this.billingForm.value)
+    console.log("address data", this.billingAddress)
+    if (!isNaN(this.id)) {
+      this.collectionService.addToCollection(this.bookService.getbookById(this.id), this.billingForm.value);
+
+    } else {
+      console.log("call from cart")
+      this.collectionService.addCartToCollection(this.cartService.getBooksIncart(), this.billingForm.value);
+    }
     this.router.navigate(['/collection']);
+  }
+
+  onCancel(): void {
+    if(!isNaN(this.id))
+    {
+      this.router.navigate(['/search',this.id])
+    }else{
+      this.router.navigate(['/cart'])
+    }
   }
 }

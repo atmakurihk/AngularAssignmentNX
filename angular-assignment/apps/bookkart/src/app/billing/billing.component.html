@@ -42,9 +42,9 @@
     </div>
     <div fxLayout="row" fxFlexAlign="center">
       <div fxFlexOffset="50" fxFlex="70">
-        <button mat-raised-button color="primary" type="submit">Submit</button>
+        <button mat-raised-button color="primary" type="submit"  [disabled]="!billingForm.valid">Submit</button>
         &nbsp;
-        <button mat-raised-button color="primary" type="button">Cancel</button>
+        <button mat-raised-button color="primary" type="button" (click)="onCancel()">Cancel</button>
       </div>
     </div>
   </form>

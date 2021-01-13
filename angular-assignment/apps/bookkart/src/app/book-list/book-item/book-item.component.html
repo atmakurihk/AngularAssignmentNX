@@ -2,7 +2,7 @@
 [routerLink]="[index]"
 routerLinkActive="active"
 >
-<mat-card>
+<mat-card matRipple matRippleCentered ="true">
   <mat-card-header>
     <mat-card-title>{{book.volumeInfo.title}}</mat-card-title>
     <img mat-card-sm-image src="{{book.volumeInfo.imageLinks.smallThumbnail}}" />
