@@ -29,7 +29,6 @@ export class AppComponent implements OnInit ,OnDestroy{
     this.cartSubscription = this.cartService.getCartSubject().subscribe(
       (cartData) =>{
         this.cartCount = cartData.length;
-        console.log("cart count ",this.cartCount);
       }
     )
 

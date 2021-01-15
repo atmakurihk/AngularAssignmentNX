@@ -13,7 +13,7 @@ export class BookService {
   constructor(private http: HttpClient) { }
 
   getBooks(searchValue: string): void {
-    this.books=[];
+    this.books = [];
     this.http.get<BookResponse>('https://www.googleapis.com/books/v1/volumes?q=' + searchValue + '&startIndex=0&maxResults=10')
       .pipe(
         map(bookdata => {

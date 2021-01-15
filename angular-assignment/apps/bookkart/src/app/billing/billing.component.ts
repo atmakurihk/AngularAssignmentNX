@@ -30,7 +30,6 @@ export class BillingComponent implements OnInit {
       }
     );
     this.initBillingForm();
-    console.log("param id in buy ", this.id);
   }
 
   initBillingForm(): void {
@@ -44,23 +43,21 @@ export class BillingComponent implements OnInit {
 
   }
   submitBill(): void {
-    console.log("bill form ", this.billingForm.value)
-    console.log("address data", this.billingAddress)
     if (!isNaN(this.id)) {
       this.collectionService.addToCollection(this.bookService.getbookById(this.id), this.billingForm.value);
 
     } else {
       console.log("call from cart")
       this.collectionService.addCartToCollection(this.cartService.getBooksIncart(), this.billingForm.value);
+      this.cartService.clearCart();
     }
     this.router.navigate(['/collection']);
   }
 
   onCancel(): void {
-    if(!isNaN(this.id))
-    {
-      this.router.navigate(['/search',this.id])
-    }else{
+    if (!isNaN(this.id)) {
+      this.router.navigate(['/search', this.id])
+    } else {
       this.router.navigate(['/cart'])
     }
   }

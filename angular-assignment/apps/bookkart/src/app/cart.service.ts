@@ -16,7 +16,6 @@ export class CartService {
   {
     this.books.push(book);
     this.cartUpated.next(this.books.slice());
-    console.log("cart data ",this.books);
   }
 
   getCartSubject():Observable<BookData[]>
@@ -31,6 +30,11 @@ export class CartService {
 
   removeFromCart(index:number):void{
     this.books.splice(index,1);
+    this.cartUpated.next(this.books.slice());
+  }
+
+  clearCart():void{
+    this.books = [];
     this.cartUpated.next(this.books.slice());
   }
 }

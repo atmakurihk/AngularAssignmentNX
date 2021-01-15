@@ -6,14 +6,11 @@ import { BookService } from '../book.service';
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss']
 })
-export class SearchComponent implements OnInit {
+export class SearchComponent{
 
   searchString = '';
   constructor(private bookService: BookService) { }
 
-
-  ngOnInit(): void {
-  }
 
   searchBooks(): void {
     this.bookService.getBooks(this.searchString);

@@ -8,7 +8,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './book-list.component.html',
   styleUrls: ['./book-list.component.scss']
 })
-export class BookListComponent implements OnInit,OnDestroy {
+export class BookListComponent implements OnInit, OnDestroy {
 
   books!: BookData[];
   bookListSubscription!: Subscription;
@@ -23,7 +23,7 @@ export class BookListComponent implements OnInit,OnDestroy {
 
   }
 
-  ngOnDestroy(): void{
+  ngOnDestroy(): void {
     this.bookListSubscription.unsubscribe();
   }
 

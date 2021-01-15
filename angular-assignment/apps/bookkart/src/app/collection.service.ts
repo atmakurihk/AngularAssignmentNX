@@ -14,11 +14,9 @@ export class CollectionService {
   constructor() { }
 
   addToCollection(book: BookData, billing: BillingAddress): void {
-    console.log("billing address", billing);
     this.collectionData = new CollectionData(book, billing);
     this.books.push(this.collectionData);
     this.collectionDataUpdated.next(this.books.slice());
-    console.log("added to collection", this.collectionData);
   }
 
   getCollectionSize(): number {

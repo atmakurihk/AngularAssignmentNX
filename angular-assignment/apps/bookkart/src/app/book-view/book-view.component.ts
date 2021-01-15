@@ -12,27 +12,25 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 export class BookViewComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
-              private bookService: BookService,
-              private cartService: CartService,
-               private router: Router) { }
+    private bookService: BookService,
+    private cartService: CartService,
+    private router: Router) { }
 
   book!: BookData;
   id!: number;
   ngOnInit(): void {
 
     this.route.params.subscribe(
-      (params: Params) =>
-      {
+      (params: Params) => {
         this.id = +params.id;
       }
     );
     this.book = this.bookService.getbookById(this.id);
   }
-  addToCart():void{
+  addToCart(): void {
     this.cartService.addToCart(this.book);
   }
-  buyNow(): void
-  {
+  buyNow(): void {
     this.router.navigate([this.id, 'buy']);
   }
 }
