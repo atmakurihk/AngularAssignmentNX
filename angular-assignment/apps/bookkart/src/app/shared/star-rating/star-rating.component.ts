@@ -13,15 +13,13 @@ export class StarRatingComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-  for (let index = 0 ; index < this.fullRating; index++)
-  {
-    if (index < this.rating)
-    {
-      this.ratingArray.push('star');
-    }else{
-      this.ratingArray.push('star_border');
+    for (let index = 0; index < this.fullRating; index++) {
+      if (index < this.rating) {
+        this.ratingArray.push('star');
+      } else {
+        this.ratingArray.push('star_border');
+      }
     }
-  }
   }
 
 }

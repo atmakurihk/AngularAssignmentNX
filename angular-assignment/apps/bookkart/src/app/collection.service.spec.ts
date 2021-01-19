@@ -13,4 +13,24 @@ describe('CollectionService', () => {
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
+
+  it('add to collection test', () => {
+    expect(service.addCartToCollection).toBeTruthy();
+  });
+
+  it('get collection size', () => {
+    expect(service.getCollectionSize).toBeTruthy();
+  });
+
+  it('get collection subject', () => {
+    expect(service.getCollectionSubject).toBeTruthy();
+  });
+
+  it('get collection data', () => {
+    expect(service.getCollectionData).toBeTruthy();
+
+  });
+  it('add colletion to cart', () => {
+    expect(service.addCartToCollection).toBeTruthy();
+  })
 });

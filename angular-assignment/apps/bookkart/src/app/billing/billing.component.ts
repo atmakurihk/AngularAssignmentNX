@@ -47,7 +47,6 @@ export class BillingComponent implements OnInit {
       this.collectionService.addToCollection(this.bookService.getbookById(this.id), this.billingForm.value);
 
     } else {
-      console.log("call from cart")
       this.collectionService.addCartToCollection(this.cartService.getBooksIncart(), this.billingForm.value);
       this.cartService.clearCart();
     }

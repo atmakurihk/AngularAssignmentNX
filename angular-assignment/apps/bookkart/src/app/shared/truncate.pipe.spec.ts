@@ -5,4 +5,9 @@ describe('TruncatePipe', () => {
     const pipe = new TruncatePipe();
     expect(pipe).toBeTruthy();
   });
+
+  it('return truncated string',()=>{
+    const pipe = new TruncatePipe();
+    expect(pipe.transform("test")).toEqual("test")
+  });
 });

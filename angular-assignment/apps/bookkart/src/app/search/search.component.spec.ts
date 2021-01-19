@@ -1,25 +1,24 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { SearchComponent } from './search.component';
-
-describe('SearchComponent', () => {
-  let component: SearchComponent;
-  let fixture: ComponentFixture<SearchComponent>;
-
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ SearchComponent ]
-    })
-    .compileComponents();
-  });
+describe('search component', () => {
+  let fixture: SearchComponent;
+  let bookserviceMock: any;
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SearchComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    bookserviceMock = {
+      getBooks: jest.fn()
+    }
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+    fixture = new SearchComponent(bookserviceMock);
+  })
+  describe('search books', () => {
+
+    it('search Books', () => {
+      let searchString = 'test';
+      fixture.searchString = searchString;
+      fixture.searchBooks();
+      const bookSerivicespy = jest.spyOn(bookserviceMock, 'getBooks');
+      expect(bookSerivicespy).toBeCalledTimes(1);
+    })
+  })
+
+})

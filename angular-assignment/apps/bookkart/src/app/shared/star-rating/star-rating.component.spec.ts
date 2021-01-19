@@ -1,3 +1,4 @@
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { StarRatingComponent } from './star-rating.component';
@@ -8,7 +9,10 @@ describe('StarRatingComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ StarRatingComponent ]
+      declarations: [ StarRatingComponent ],
+      schemas:[
+        CUSTOM_ELEMENTS_SCHEMA
+      ]
     })
     .compileComponents();
   });
@@ -22,4 +26,11 @@ describe('StarRatingComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('display rating',() =>{
+    component.rating = 4;
+    fixture.detectChanges();
+    expect(component.ratingArray.length).toEqual(5);
+
+  })
 });
