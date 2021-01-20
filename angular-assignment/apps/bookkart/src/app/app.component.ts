@@ -1,3 +1,5 @@
+import { BookData } from './models/bookData.model';
+import { CollectionData } from './models/collectionData.model';
 import { Subscription } from 'rxjs';
 import { CartService } from './cart.service';
 import { CollectionService } from './collection.service';
@@ -21,13 +23,13 @@ export class AppComponent implements OnInit ,OnDestroy{
 
   ngOnInit():void{
     this.collectionSubscription = this.collectionService.getCollectionSubject().subscribe(
-      (bookData) =>{
+      (bookData:CollectionData[]) =>{
         this.collectionCount = bookData.length;
       }
     );
 
     this.cartSubscription = this.cartService.getCartSubject().subscribe(
-      (cartData) =>{
+      (cartData:BookData[]) =>{
         this.cartCount = cartData.length;
       }
     )

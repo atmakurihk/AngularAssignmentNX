@@ -1,5 +1,4 @@
 import { CollectionData } from './../models/collectionData.model';
-import { BookData } from './../models/bookData.model';
 import { Subscription } from 'rxjs';
 import { CollectionService } from './../collection.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
@@ -11,13 +10,13 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 })
 export class CollectionComponent implements OnInit, OnDestroy {
 
-  booksCollection!: CollectionData[];
+  booksCollection: CollectionData[];
   constructor(private collectionService: CollectionService) { }
-  collectionSubscription!: Subscription;
+  collectionSubscription: Subscription;
   ngOnInit(): void {
     this.booksCollection = this.collectionService.getCollectionData();
     this.collectionSubscription = this.collectionService.getCollectionSubject().subscribe(
-      (bookData) => {
+      (bookData: CollectionData[]) => {
         this.booksCollection = bookData;
       }
     );

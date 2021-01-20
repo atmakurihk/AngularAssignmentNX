@@ -12,14 +12,15 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 export class CartComponent implements OnInit, OnDestroy {
 
   constructor(private cartService: CartService, private router: Router) { }
-  books!: BookData[];
+  books: BookData[];
   cartDataSubscription: Subscription;
   ngOnInit(): void {
 
     this.books = this.cartService.getBooksIncart();
-    this.cartDataSubscription = this.cartService.getCartSubject().subscribe((bookdata) => {
-      this.books = bookdata;
-    });
+    this.cartDataSubscription = this.cartService.getCartSubject()
+      .subscribe((bookdata: BookData[]) => {
+        this.books = bookdata;
+      });
   }
 
   removeItem(index: number) {

@@ -1,59 +1,62 @@
-import { of } from 'rxjs';
 import { BookData } from './../models/bookData.model';
+import { of } from 'rxjs';
+import { BookService } from './../book.service';
+import { HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { BookListComponent } from './book-list.component';
-/*
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 describe('BookListComponent', () => {
   let component: BookListComponent;
   let fixture: ComponentFixture<BookListComponent>;
+  let bookService: any;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [BookListComponent]
-    })
-      .compileComponents();
+      declarations: [BookListComponent],
+      imports: [HttpClientModule],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    }).compileComponents();
   });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(BookListComponent);
     component = fixture.componentInstance;
+    bookService = fixture.debugElement.injector.get(BookService);
     fixture.detectChanges();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-});
- */
 
-describe('book list component', () => {
-  let fixture: BookListComponent;
-  let bookServiceMock: any;
-  let books:BookData[];
-  beforeEach(() => {
-    bookServiceMock = {
-      loadBooks: jest.fn(),
-      displayBooks:of(books)
-    }
-    fixture = new BookListComponent(bookServiceMock);
-    fixture.ngOnInit()
-  })
+  describe('Test ng on init', () => {
+    it('Test subscription', () => {
+      const app = fixture.componentInstance;
+      const books: BookData[] = [];
+      const collectionSpy = spyOn(bookService, 'displayBooks').and.returnValue(
+        of(books)
+      );
+      fixture.detectChanges();
+      expect(app.books.length).toBe(0);
+    });
+    it('Test load books intially', () => {
+      const app = fixture.componentInstance;
+      const books: BookData[] = [];
+      const collectionSpy = spyOn(bookService, 'loadBooks').and.returnValue(
+        books
+      );
+      fixture.detectChanges();
+      expect(app.books.length).toBe(0);
+    });
+  });
 
-  describe('Test ng on it', () => {
-
-    it('should load books', () => {
-    const books:BookData[]=[];
-
-      const bookServiceSpy = jest.spyOn(bookServiceMock,'loadBooks').mockReturnValue(books);
-    //  const bookDisplaySpy = jest.spyOn(bookServiceMock,'displayBooks').mockReturnValue((books));
-     //fixture.books= bookServiceMock.displayBooks.mockReturnValue((books));
-      expect(bookServiceMock.loadBooks()).toBe(books);
-     // expect(bookServiceMock.displayBooks()).toBe(books);
-      expect(bookServiceSpy).toHaveBeenCalled();
-      expect(bookServiceMock.displayBooks).toBeTruthy();
-     // expect(bookDisplaySpy).toHaveBeenCalled();
-     //expect(fixture.books).toBe(books);
-    })
-  })
+  describe('Test component on ng destroy', () => {
+    it('Test un subscribe subject', () => {
+      const app = fixture.componentInstance;
+      const subscription = app.bookListSubscription;
+      const subSpy = spyOn(subscription, 'unsubscribe');
+      app.ngOnDestroy();
+      expect(subSpy).toHaveBeenCalled();
+    });
+  });
 });

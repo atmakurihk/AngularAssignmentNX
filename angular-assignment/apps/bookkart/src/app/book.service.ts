@@ -23,6 +23,7 @@ export class BookService {
       .subscribe((bookData) => {
         this.books.push(...bookData);
         this.bookListUpdated.next(this.books.slice());
+        console.log("book data",JSON.stringify(this.books));
       },
         error => {
           console.log(error);

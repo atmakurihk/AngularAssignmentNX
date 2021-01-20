@@ -1,21 +1,21 @@
 <div class="bookLayout" fxLayout="row" fxLayoutAlign="center none">
   <mat-card>
     <mat-card-header>
-      <mat-card-title>{{book.volumeInfo.title}}</mat-card-title>
-      <img mat-card-sm-image src="{{book.volumeInfo.imageLinks.smallThumbnail}}" />
+      <mat-card-title>{{title}}</mat-card-title>
+      <img mat-card-sm-image src="{{image}}" />
     </mat-card-header>
     <mat-card-content>
       <p><b>Rating:&nbsp;</b></p><span>
-        <angular-assignment-star-rating [rating]="book.volumeInfo.averageRating"></angular-assignment-star-rating>
+        <angular-assignment-star-rating [rating]="averageRating"></angular-assignment-star-rating>
       </span>
-      <p> <b>Publisher:&nbsp;</b><span>{{book.volumeInfo.publisher}}</span></p>
-      <p><b>Page Count:&nbsp;</b><span>{{book.volumeInfo.pageCount}}</span></p>
-      <p> <b>Language:&nbsp;</b><span>{{book.volumeInfo.language}}</span></p>
-      <p>{{book.volumeInfo.description}}</p>
+      <p> <b>Publisher:&nbsp;</b><span>{{publisher}}</span></p>
+      <p><b>Page Count:&nbsp;</b><span>{{pageCount}}</span></p>
+      <p> <b>Language:&nbsp;</b><span>{{language}}</span></p>
+      <p>{{description}}</p>
     </mat-card-content>
     <mat-card-footer style="text-align: left;">
       <p><b> Written By:</b></p>
-      <p>{{book.volumeInfo.authors | authorTransform}}</p>
+      <p>{{authors | authorTransform}}</p>
     </mat-card-footer>
     <mat-card-actions>
 

@@ -1,3 +1,5 @@
+import { CollectionData } from './models/collectionData.model';
+import { Subject } from 'rxjs';
 import { TestBed } from '@angular/core/testing';
 
 import { CollectionService } from './collection.service';
@@ -19,18 +21,21 @@ describe('CollectionService', () => {
   });
 
   it('get collection size', () => {
-    expect(service.getCollectionSize).toBeTruthy();
+
+    expect(service.getCollectionSize()).toBe(0);
   });
 
   it('get collection subject', () => {
-    expect(service.getCollectionSubject).toBeTruthy();
+    const sub = new Subject<CollectionData[]>();
+    expect(service.getCollectionSubject()).toStrictEqual(sub.asObservable());
   });
 
   it('get collection data', () => {
-    expect(service.getCollectionData).toBeTruthy();
+    const collectionData: CollectionData[] = [];
+    expect(service.getCollectionData()).toStrictEqual(collectionData);
 
   });
   it('add colletion to cart', () => {
     expect(service.addCartToCollection).toBeTruthy();
-  })
+  });
 });

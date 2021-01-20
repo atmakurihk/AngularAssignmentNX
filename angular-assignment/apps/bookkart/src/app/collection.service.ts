@@ -31,7 +31,7 @@ export class CollectionService {
     return this.books;
   }
 
-  addCartToCollection(cartData: BookData[], billing: BillingAddress) {
+  addCartToCollection(cartData: BookData[], billing: BillingAddress):void {
     cartData.forEach(
       (book) => {
         this.collectionData = new CollectionData(book, billing);

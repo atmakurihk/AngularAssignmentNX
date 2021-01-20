@@ -1,3 +1,4 @@
+import { BookData } from './models/bookData.model';
 import { TestBed } from '@angular/core/testing';
 
 import { BookService } from './book.service';
@@ -5,7 +6,6 @@ import { HttpClientModule } from '@angular/common/http';
 
 describe('BookService', () => {
   let service: BookService;
-
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
@@ -32,7 +32,9 @@ describe('BookService', () => {
   })
 
   it('load books test', () => {
+    const books:BookData[] = [];
     expect(service.loadBooks).toBeTruthy();
+    expect(service.loadBooks()).toStrictEqual(books);
   })
 
 });

@@ -11,7 +11,6 @@ export class SearchComponent{
   searchString = '';
   constructor(private bookService: BookService) { }
 
-
   searchBooks(): void {
     this.bookService.getBooks(this.searchString);
   }

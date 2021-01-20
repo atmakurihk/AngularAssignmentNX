@@ -12,8 +12,8 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./billing.component.scss']
 })
 export class BillingComponent implements OnInit {
-  id!: number;
-  billingForm !: FormGroup;
+  id: number;
+  billingForm: FormGroup;
   billingAddress: BillingAddress = null;
 
   constructor(private route: ActivatedRoute,

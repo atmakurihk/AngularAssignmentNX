@@ -7,7 +7,7 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class StarRatingComponent implements OnInit {
 
-  @Input() rating!: number;
+  @Input() rating: number;
   fullRating = 5;
   ratingArray: string[] = [];
   constructor() { }

@@ -13,7 +13,7 @@ describe('search component', () => {
   describe('search books', () => {
 
     it('search Books', () => {
-      let searchString = 'test';
+      const searchString = 'test';
       fixture.searchString = searchString;
       fixture.searchBooks();
       const bookSerivicespy = jest.spyOn(bookserviceMock, 'getBooks');

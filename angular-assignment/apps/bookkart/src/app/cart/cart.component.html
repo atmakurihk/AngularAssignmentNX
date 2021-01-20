@@ -1,6 +1,6 @@
 <div class="content">
-  <h1 color="primary"  *ngIf="books.length === 0">Cart Is Empty !!!</h1>
-  <div fxLayout="column" fxLayoutGap="16px" fxLayoutAlign="center" >
+  <h1 color="primary" *ngIf="books.length === 0">Cart Is Empty !!!</h1>
+  <div fxLayout="column" fxLayoutGap="16px" fxLayoutAlign="center">
     <div fxFlex="50%" *ngFor="let book of books;let i =index">
       <mat-card>
         <mat-card-header>
@@ -10,8 +10,8 @@
         <mat-card-content>
           <p>{{book.volumeInfo.description | truncate}}</p>
         </mat-card-content>
-        <mat-card-footer >
-          <mat-icon  color="accent" (click)="removeItem(i)">remove_shopping_cart</mat-icon>
+        <mat-card-footer>
+          <mat-icon color="accent" (click)="removeItem(i)">remove_shopping_cart</mat-icon>
           <b style="text-align: left;"> Written By:</b>
           <p style="text-align: left;">{{book.volumeInfo.authors | authorTransform}}</p>
 
@@ -22,4 +22,4 @@
   <div style="margin-top: 2%;" *ngIf="books.length >0">
     <button mat-raised-button color="primary" (click)="checkOut()">Check Out</button>
   </div>
-  </div>
+</div>

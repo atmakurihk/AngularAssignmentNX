@@ -16,8 +16,8 @@ export class BookViewComponent implements OnInit {
     private cartService: CartService,
     private router: Router) { }
 
-  book!: BookData;
-  id!: number;
+  book: BookData;
+  id: number;
   ngOnInit(): void {
 
     this.route.params.subscribe(
@@ -32,5 +32,38 @@ export class BookViewComponent implements OnInit {
   }
   buyNow(): void {
     this.router.navigate([this.id, 'buy']);
+  }
+
+  get title(): string {
+    return this.book.volumeInfo.title;
+  }
+
+  get image(): string {
+    return this.book.volumeInfo.imageLinks.smallThumbnail;
+  }
+
+  get averageRating(): number {
+
+    return this.book.volumeInfo.averageRating;
+  }
+
+  get publisher(): string {
+    return this.book.volumeInfo.publisher;
+  }
+
+  get pageCount(): number {
+    return this.book.volumeInfo.pageCount;
+  }
+
+  get language(): string {
+    return this.book.volumeInfo.language;
+  }
+
+  get description(): string {
+    return this.book.volumeInfo.description;
+  }
+
+  get authors(): string[] {
+    return this.book.volumeInfo.authors;
   }
 }

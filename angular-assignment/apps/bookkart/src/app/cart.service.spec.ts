@@ -1,6 +1,7 @@
+import { Observable, Subject } from 'rxjs';
 import { TestBed } from '@angular/core/testing';
-
 import { CartService } from './cart.service';
+import { BookData } from './models/bookData.model';
 
 describe('CartService', () => {
   let service: CartService;
@@ -19,12 +20,13 @@ describe('CartService', () => {
   });
 
   it('get cart subject', () => {
-    expect(service.getCartSubject()).toBeTruthy();
+    const sub = new Subject<BookData[]>();
+    expect(service.getCartSubject()).toStrictEqual(sub.asObservable());
   });
 
   it('get books in cart', () => {
-
-    expect(service.getBooksIncart()).toBeTruthy();
+    const bookData: BookData[] = [];
+    expect(service.getBooksIncart()).toStrictEqual(bookData);
   });
 
   it('remove from cart', () => {

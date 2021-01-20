@@ -3,51 +3,79 @@ import { CartService } from './cart.service';
 import { CollectionData } from './models/collectionData.model';
 import { of, Subscription } from 'rxjs';
 import { CollectionService } from './collection.service';
-import { TestBed } from '@angular/core/testing';
+import { TestBed, ComponentFixture } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
-import {CUSTOM_ELEMENTS_SCHEMA} from '@angular/core'
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
 
 describe('AppComponent', () => {
-  let subscriptionMock :Subscription;
+  let component: AppComponent;
+  let fixture: ComponentFixture<AppComponent>;
+  let cartService: any;
+  let collectionService: any;
+
   beforeEach(async () => {
-    subscriptionMock = new Subscription();
-     TestBed.configureTestingModule({
+    await TestBed.configureTestingModule({
       imports: [
         RouterTestingModule
       ],
       declarations: [
         AppComponent
       ],
-      schemas:[
+      schemas: [
         CUSTOM_ELEMENTS_SCHEMA
       ]
     }).compileComponents();
   });
 
-  it('should create the app', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app).toBeTruthy();
+  beforeEach(() => {
+    fixture = TestBed.createComponent(AppComponent);
+    component = fixture.componentInstance;
+    cartService = fixture.debugElement.injector.get(CartService);
+    collectionService = fixture.debugElement.injector.get(CollectionService);
+    fixture.detectChanges();
   });
 
-  it('should get collection count',() =>{
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    const collectionValue : CollectionData[]=[];
-    const collectionService = fixture.debugElement.injector.get(CollectionService);
-    const collectionSpy = spyOn(collectionService,'getCollectionSubject').and.returnValue(of(collectionValue));
-    fixture.detectChanges();
-    expect(app.collectionCount).toBe(0);
+  it('should create', () => {
+    expect(component).toBeTruthy();
   });
 
-  it('should get cart count',() =>{
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    const cartValue : BookData[]=[];
-    const cartService = fixture.debugElement.injector.get(CartService);
-    const collectionSpy = spyOn(cartService,'getCartSubject').and.returnValue(of(cartValue));
-    fixture.detectChanges();
-    expect(app.cartCount).toBe(0);
+  describe('Test ng oninit', () => {
+    it('subscribe for collection count', () => {
+      const app = fixture.componentInstance;
+      const collectionValue: CollectionData[] = [];
+      const collectionSpy = spyOn(collectionService, 'getCollectionSubject').and.returnValue(of(collectionValue));
+      fixture.detectChanges();
+      app.ngOnInit();
+      expect(app.collectionCount).toBe(0);
+    });
+
+    it('subscribe for cart count', () => {
+      const app = fixture.componentInstance;
+      const cartvalue: BookData[] = [];
+      const cartSpy = spyOn(cartService, 'getCartSubject').and.returnValue(of(cartvalue));
+      fixture.detectChanges();
+      app.ngOnInit();
+      expect(app.cartCount).toBe(0);
+    });
   });
+
+  describe('Test ng on destroy', () => {
+    it('un subscribe collection subject', () => {
+      const app = fixture.componentInstance;
+      const subscription = app.collectionSubscription;
+      const subSpy = spyOn(subscription, 'unsubscribe');
+      fixture.detectChanges();
+      app.ngOnDestroy();
+      expect(subSpy).toHaveBeenCalled();
+    });
+    it('un subscribe cart subject', () => {
+      const app = fixture.componentInstance;
+      const subscription = app.cartSubscription;
+      const subSpy = spyOn(subscription, 'unsubscribe');
+      fixture.detectChanges();
+      app.ngOnDestroy();
+      expect(subSpy).toHaveBeenCalled();
+    });
+  })
 });
