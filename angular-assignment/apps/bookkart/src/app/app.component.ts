@@ -15,8 +15,8 @@ export class AppComponent implements OnInit ,OnDestroy{
   constructor(private collectionService:CollectionService,private cartService:CartService){
 
   }
-  collectionCount !:number;
-  cartCount !:number;
+  collectionCount :number;
+  cartCount :number;
 
   collectionSubscription:Subscription;
   cartSubscription:Subscription;
